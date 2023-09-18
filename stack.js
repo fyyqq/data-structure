@@ -27,6 +27,9 @@ class Stack {
     unshift(data) {
         return this.item = [data, ...this.item];
     }
+    firstItem() {
+        return this.item = this.item[0];
+    }
     peek() {
         if (this.isEmpty(this.item)) {
             console.log('Empty stack!');
@@ -109,6 +112,9 @@ stack.push(3);
 stack.push(4);
 stack.push(5);
 // stack.pop();
+// stack.shift();
+// stack.unshift(7);
+// stack.firstItem();
 // stack.peek();
 // stack.reverse();
 // stack.size();
