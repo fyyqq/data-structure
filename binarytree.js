@@ -130,7 +130,7 @@ class BinaryTable {
         }
         return node;
     }
-    findMin(node, data) { 
+    findMin(node, data) {
         if (node.right !== null) {
             let current = node;
             while (node) {
