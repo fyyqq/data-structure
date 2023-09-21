@@ -99,47 +99,98 @@ class BinaryTable {
             console.log(`Node isn't created yet`);
             return;
         }
-        return this.removeData(this.root, data);
+        this.root = this.removeData(this.root, data);
     }
-    removeData(nodes, data) {
-        if (!nodes) { 
+    removeData(node, data) {
+        if (!node) {
             console.log(`Data ${data} not found!`);
-            return;
+            return node;
         }
-
-        if (nodes.data === data) {
-            return this.root = null;
-        } else if (nodes.left.data === data) {
-            return this.root.left = null;
-        } else if (nodes.right.data === data) {
-            return this.root.right = null;
-        }
-
-        if (data < nodes.data) {
-            return this.removeData(nodes.left, data);
+        
+        if (data < node.data) {
+            node.left = this.removeData(node.left, data);
+        } else if (data > node.data) {
+            node.right = this.removeData(node.right, data); 
         } else {
-            return this.removeData(nodes.right, data);
+            if (node.left === null && node.right === null) {
+                node = null;
+            } else if (node.left === null) {
+                node = node.right;
+            } else if (node.right === null) {
+                node = node.left;
+            } else {
+                if (this.root.data === data) {
+                    this.findMin(node.left, data);
+                } else {
+                    const upper = node.right;
+                    node = node.left;
+                    node.right = upper;
+                }
+            }
+        }
+        return node;
+    }
+    findMin(node, data) { 
+        if (node.right !== null) {
+            let current = node;
+            while (node) {
+                if (node.right.right === null) {
+                    current = node;
+                    break;
+                }
+                node = node.right;
+            }
+            if (current.right !== null && current.left === null) {
+                this.root.data = current.right.data;
+                current.right = null;
+            } else if (current.right !== null && current.left !== null) {
+                this.root.data = current.right.data;
+                current.right = current.right.left;
+            }
+            return current;
         }
     }
 }
 
 const binaryTable = new BinaryTable();
+binaryTable.insert(50);
+binaryTable.insert(30);
+binaryTable.insert(70);
+binaryTable.insert(20);
+binaryTable.insert(40);
+binaryTable.insert(60);
+binaryTable.insert(80);
+binaryTable.insert(15);
+binaryTable.insert(25);
+binaryTable.insert(35);
+binaryTable.insert(45);
+binaryTable.insert(55);
+binaryTable.insert(65);
+binaryTable.insert(75);
+binaryTable.insert(85);
+binaryTable.insert(10);
 binaryTable.insert(5);
-binaryTable.insert(3);
-binaryTable.insert(4);
-binaryTable.insert(2);
-binaryTable.insert(7);
-binaryTable.insert(6);
-binaryTable.insert(8);
-binaryTable.insert(1);
+binaryTable.insert(95);
+binaryTable.insert(100);
+binaryTable.insert(90);
+binaryTable.insert(70);
+binaryTable.insert(45);
+binaryTable.insert(25);
+binaryTable.insert(15);
+binaryTable.insert(5);
 // console.log(binaryTable.find(5));
 // console.log(binaryTable.get());
 // binaryTable.replace(2, 5);
-// binaryTable.remove(7);
+binaryTable.remove(50);
+binaryTable.remove(45);
+binaryTable.remove(45);
+binaryTable.remove(40);
+// binaryTable.remove(35);
+// console.log('-------------------');
 console.log(binaryTable.root);
 
 // insert 😈
 // Search 😈
 // Get data 😈
 // Update 😈
-// Delete 😈
+// Delete
