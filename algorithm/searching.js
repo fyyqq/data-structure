@@ -21,17 +21,11 @@ console.log(ls);
 
 
 function binarySearch(arrays, target) {
-    let right = arrays.length - 1; // 9
-    let left = 0;
+    let arrayLength = arrays.length; // 10
     
-    while (left <= right) {
-        const mid = Math.floor((left + right) / 2);
-        if (arrays[mid] === target) {
-            return { index: mid, number: arrays[mid] };
-        } else if (arrays[mid] < target) {
-            left = mid + 1
-        } else {
-            right = mid - 1
+    for (let i = 0; i < arrayLength; i++) {
+        if (arrays[i] === target) {
+            return { index: i, number: arrays[i], message: `We found ${arrays[i]}` };
         }
     }
     return { message: `We don't found ${target}` };
