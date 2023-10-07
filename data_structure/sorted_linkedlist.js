@@ -75,4 +75,4 @@ const mergeTwoLists = function(list1, list2) {
 
 const [left, right] = linkedList.convertList();
 const result = mergeTwoLists(left, right);
-console.log(result);
+console.log(result)
